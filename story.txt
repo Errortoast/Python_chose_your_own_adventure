@@ -1,7 +1,23 @@
 ::Mission - Escape prison
-	:TestPath01:WhatNext?
-		:TestOption01:1
-		:TestOption02:2
-	:TestPath02:WhatNow?
-		:TestOption03:3
-		:TestOption04:4
+	:Cake:There is a bomb in the cake. Boom
+	:Plant remote detonated bomb::#after 50 planted remote bombs, unlock option to explode entire facility. otherwise go back 1 step
+	:File:It sure is taking a while:#wait for a bit then continue. if player choses file 35 times, die of old age
+	:Tunnel:You dig a tunnel under the bed. You come out in the warden's office. The warden is on his way! Quick! Hide!
+		:Hide in the closet:The warden doesn't seem to ever leave. How long will you be waiting?
+			:Keep waiting::#Go back a step
+			:Make a run for it::#Go to run for it path
+		:Jump out the window:It was a little higher than you expected.:#fall to your death ending
+		:Hide behind the curtain:Phew! thee warden doesn't notice you. He sits down by his desk:#check if remote bomb was planted earlier. If so, add remote bomb button
+			:Make a run for it: The warden chases after you
+				:Dive under closing garage door:You didn't manage to get all the way through. You get sliced in half as it closes. RIP:#Death ending
+				:Throw rock: You turn your head and throw the rock. While you aren't paying attention, you hit your head on a metal pipe. You get caught and put back in your cell:#Restart
+			:Throw rock outside the door:The warden goes to check what made that noise. He finds nothing and comes back:#go back a step
+			:Remote bomb:Oh dear. You triggered the prison alarm. The prison goes into high alert. The warden leaves to go search for you
+				:Run to the supply closet:There are 3 things that could be useful
+					:Grappling hook:You attach the hook inside the window and slowly climb down the prison:#escape ending. Mission Passed - Respect+
+					:Parachute:You jump out a window. Oh dear. It seems that that was not a parachute.:#splat
+					:Guard disguise:You walk to the exit. You scan the key card on your belt. Easy escape:#Mission Passed - Respect+
+				:Run to helipad:There is a concerning lack of a helicopter on the helipad
+					:Metal pipe:You attempt to fight off the guards. You get shot dead:#dead ending
+					:Hide behind ammunition crate:You weren't fast enough. They saw you. You get sent back to your cell:#restart game
+	:Explode facility:Boom:#everyone explodes ending
