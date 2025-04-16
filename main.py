@@ -35,39 +35,40 @@ option3Enabled = True;
 option4Enabled = True;
 option5Enabled = True;
 
-restartButton = tk.Button(text="Restart", command=restart);
-exitButton = tk.Button(text="Exit", command=quit);
-endText = tk.Text(window, height = 1, width = 25, justify='center');
-endText.insert('1.0', cause);
+storyEnded = False
 
 def option1Pressed():
     global currentLine, option1line;
-    print("option 1 pressed");
     currentLine = option1line;
     nextOption();
 
 def option2Pressed():
     global currentLine, option2line;
-    print("option 2 pressed");
     currentLine = option2line;
     nextOption();
 
 def option3Pressed():
     global currentLine, option3line;
-    print("option 3 pressed");
     currentLine = option3line;
     nextOption();
 
 def option4Pressed():
     global currentLine, option4line;
-    print("option 4 pressed");
     currentLine = option4line;
     nextOption();
 
 def option5Pressed():
     global currentLine, option5line;
-    print("option 5 pressed");
     currentLine = option5line;
+    nextOption();
+
+def restart():
+    global currentLine, text, restartButton, exitButton, storyEnded;
+    text.delete("1.0", tk.END);
+    restartButton.destroy();
+    exitButton.destroy();
+    currentLine=0;
+    storyEnded = False;
     nextOption();
 
 option1 = tk.Button(text=option1Text, command=option1Pressed);
@@ -76,7 +77,10 @@ option3 = tk.Button(text=option3Text, command=option3Pressed);
 option4 = tk.Button(text=option4Text, command=option4Pressed);
 option5 = tk.Button(text=option5Text, command=option5Pressed);
 
-text = tk.Text(window, height=5, width=50, justify='center');
+text = tk.Text(window, height=5, width=50);
+
+restartButton = tk.Button(text="Restart", command=restart);
+exitButton = tk.Button(text="Exit", command=quit);
 
 def updateButtons(numButtons):
     global option1, option2, option3, option4, option5, text;
@@ -86,7 +90,6 @@ def updateButtons(numButtons):
     option4.destroy();
     option5.destroy();
     text.delete("1.0", tk.END);
-    endText.delete("1.0", tk.END);
     restartButton.destroy();
     exitButton.destroy();
 
@@ -118,6 +121,8 @@ def nextOption():
         print("Expected code segment not found in the story line.");
     except Exception as e:
         print(f"Error executing code: {e}");
+    if storyEnded:
+        return;
     numTabs = (len(story[currentLine].split("|")[0]));
     question = story[currentLine].split("|")[2];
     numOptionsUsed = 0;
@@ -149,28 +154,25 @@ def nextOption():
             break;
     updateButtons(numOptionsUsed);
 
-def restart():
-    endText.delete("1.0", tk.END);
-    restartButton.destroy();
-    exitButton.destroy();
-    global currentLine;
-    currentLine=0;
-    nextOption();
-
 def end(cause = "You Died"):
+    global option1, option2, option3, option4, option5, text, restartButton, exitButton, storyEnded;
     option1.destroy();
     option2.destroy();
     option3.destroy();
     option4.destroy();
     option5.destroy();
     text.delete("1.0", tk.END);
-    endText.delete("1.0", tk.END);
     restartButton.destroy();
     exitButton.destroy();
 
-    endText.pack(padx=20, pady=20);
+    restartButton = tk.Button(text="Restart", command=restart);
+    exitButton = tk.Button(text="Exit", command=quit);
+    text.insert("1.0", cause);
+
+    text.pack(padx=20, pady=20);
     restartButton.pack(padx=10, pady=10);
     exitButton.pack(padx=10, pady=10);
+    storyEnded = True
 
 #region MAIN
 nextOption();
