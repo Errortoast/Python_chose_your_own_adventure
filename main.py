@@ -35,6 +35,11 @@ option3Enabled = True;
 option4Enabled = True;
 option5Enabled = True;
 
+restartButton = tk.Button(text="Restart", command=restart);
+exitButton = tk.Button(text="Exit", command=quit);
+endText = tk.Text(window, height = 1, width = 25, justify='center');
+endText.insert('1.0', cause);
+
 def option1Pressed():
     global currentLine, option1line;
     print("option 1 pressed");
@@ -81,6 +86,9 @@ def updateButtons(numButtons):
     option4.destroy();
     option5.destroy();
     text.delete("1.0", tk.END);
+    endText.delete("1.0", tk.END);
+    restartButton.destroy();
+    exitButton.destroy();
 
     option1 = tk.Button(text=option1Text, command=option1Pressed);
     option2 = tk.Button(text=option2Text, command=option2Pressed);
@@ -142,24 +150,25 @@ def nextOption():
     updateButtons(numOptionsUsed);
 
 def restart():
+    endText.delete("1.0", tk.END);
+    restartButton.destroy();
+    exitButton.destroy();
     global currentLine;
     currentLine=0;
     nextOption();
 
 def end(cause = "You Died"):
-    restartButton = tk.Button(text="Restart", command=restart);
-    exitButton = tk.Button(text="Exit", command=quit);
-    text = tk.Text(window, height = 1, width = 25, justify='center');
-    text.insert('1.0', cause);
-
     option1.destroy();
     option2.destroy();
     option3.destroy();
     option4.destroy();
     option5.destroy();
     text.delete("1.0", tk.END);
+    endText.delete("1.0", tk.END);
+    restartButton.destroy();
+    exitButton.destroy();
 
-    text.pack(padx=20, pady=20);
+    endText.pack(padx=20, pady=20);
     restartButton.pack(padx=10, pady=10);
     exitButton.pack(padx=10, pady=10);
 
