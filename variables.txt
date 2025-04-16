@@ -1,1 +1,2 @@
 bombsPlanted = 0
+filedTimes = 0
