@@ -77,7 +77,7 @@ option3 = tk.Button(text=option3Text, command=option3Pressed);
 option4 = tk.Button(text=option4Text, command=option4Pressed);
 option5 = tk.Button(text=option5Text, command=option5Pressed);
 
-text = tk.Text(window, height=5, width=50);
+text = tk.Text(window, height=5, width=50, wrap='word');
 
 restartButton = tk.Button(text="Restart", command=restart);
 exitButton = tk.Button(text="Exit", command=quit);

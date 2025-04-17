@@ -1,17 +1,17 @@
 ||Mission - Escape prison|global bombsPlanted\nif(bombsPlanted>=30):\n\toption5Enabled = True\nelse:\n\toption5Enabled = False
 	|Cake|There is a bomb in the cake. Boom|end("There was a bomb in the cake. You blew up.")
 	|Plant remote detonated bomb||global bombsPlanted, currentLine, oldLine\nbombsPlanted += 1\ncurrentLine -=2\nnextOption()
-	|File|It sure is taking a while|global filedTimes\nif(filedTimes>=50):\n\tend("You spent so long filing away that you died of old age")\ntext.delete("1.0", tk.END)\ntext.insert('1.0', "...")\ntime.sleep(10)\nfiledTimes += 1
+	|File|It sure is taking a while|global filedTimes\nif(filedTimes>=50):\n\tend("You spent so long filing away that you died of old age")\nelse:\n\ttext.delete("1.0", tk.END)\n\ttext.insert('1.0', "...")\n\ttext.update_idletasks()\n\ttime.sleep(5)\n\tfiledTimes += 1
 		|Continue||currentLine-=4\nnextOption()
 	|Tunnel|You dig a tunnel under the bed. You come out in the warden's office. The warden is on his way! Quick! Hide!
 		|Hide in the closet|The warden doesn't seem to ever leave. How long will you be waiting?
-			|Keep waiting||#Go back a step
-			|Make a run for it||#Go to run for it path
+			|Keep waiting||global currentLine\ncurrentLine-=1\nnextOption()
+			|Make a run for it||global currentLine\ncurrentLine+=3\nnextOption()
 		|Jump out the window|It was a little higher than you expected.|end("It was a little higher than you were expecting. You fall to the ground and die")
 		|Hide behind the curtain|Phew! the warden doesn't notice you. He sits down by his desk|if(bombsPlanted>0):\n\toption3Enabled = True\nelse:\n\toption3Enabled = False
 			|Make a run for it|The warden chases after you
 				|Dive under closing garage door|You didn't manage to get all the way through. You get sliced in half as it closes. RIP|end("You didn't manage to get all the way through. You get sliced in half as it closes. RIP")
-				|Throw rock: You turn your head and throw the rock. While you aren't paying attention, you hit your head on a metal pipe. You get caught and put back in your cell:|Restart
+				|Throw rock||end("You turn your head and throw the rock. While you aren't paying attention, you hit your head on a metal pipe. You get caught and put back in your cell")
 			|Throw rock outside the door:The warden goes to check what made that noise. He finds nothing and comes back:
 				|Continue||global currentLine\ncurrentLine -= 5\nnextOption()
 			|Remote bomb|Oh dear. You triggered the prison alarm. The prison goes into high alert. The warden leaves to go search for you
