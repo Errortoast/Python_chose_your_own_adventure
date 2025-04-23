@@ -8,11 +8,10 @@ import os;
 window = tk.Tk();
 window.title("Chose your own adventure");
 
-#window.withdraw();
-
+#Get file selected by user
 storyfilename = filedialog.askopenfilename(initialdir = "/", title = "Select Story", filetypes=[("Story files", "*.cyoastory"), ("All files", "*.*")]);
 
-#window.deiconify();
+#open .cyoastory file and read variable and story txt files
 try:
     with zipfile.ZipFile(storyfilename, 'r') as zip_ref:
         zip_ref.extractall("temp");
@@ -24,13 +23,10 @@ except :
     print("File invalid");
     sys.exit();
 
-
-print(story);
-
 # execute the variables file
 exec(variables_code, globals())
 
-
+#delete temp files when program closes
 def exit_handler():
     try:
         os.remove("temp/story.txt")
@@ -65,6 +61,7 @@ option5Enabled = True;
 
 storyEnded = False
 
+#event handlers
 def option1Pressed():
     global currentLine, option1line;
     currentLine = option1line;
