@@ -73,7 +73,7 @@ option5Enabled ------------ Is option 5 enabled (bool)\
 
 ## Creating a .cyoastory file
 
-It's really quite simple.\
+It's really quite simple.
 1) Select both your variables.txt and story.txt
 2) Right click and compress to zip file
 3) Rename the zip file to [your story name].cyoastory
