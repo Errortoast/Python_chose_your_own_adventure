@@ -69,4 +69,11 @@ window -------------------- Tkinter window (object)\
 option2Enabled ------------ Is option 2 enabled (bool) ---- Use if you want to disable a line that is still in your story\
 option3Enabled ------------ Is option 3 enabled (bool)\
 option4Enabled ------------ Is option 4 enabled (bool)\
-option5Enabled ------------ Is option 5 enabled (bool)
+option5Enabled ------------ Is option 5 enabled (bool)\
+
+## Creating a .cyoastory file
+
+It's really quite simple.\
+1) Select both your variables.txt and story.txt
+2) Right click and compress to zip file
+3) Rename the zip file to [your story name].cyoastory
