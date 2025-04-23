@@ -1,17 +1,46 @@
 import tkinter as tk;
 import time;
-
-storyFile = open("story.txt", "r");
-story = [line.rstrip('\n') for line in storyFile.readlines()];
-storyFile.close();
-
-# Read the variables file
-with open("variables.txt", "r") as var_file:
-    variables_code = var_file.read()
-exec(variables_code, globals())
+from tkinter import filedialog;
+import zipfile;
+import atexit;
+import os;
 
 window = tk.Tk();
-window.title("Hello World");
+window.title("Chose your own adventure");
+
+#window.withdraw();
+
+storyfilename = filedialog.askopenfilename(initialdir = "/", title = "Select Story", filetypes=[("Story files", "*.cyoastory"), ("All files", "*.*")]);
+
+#window.deiconify();
+try:
+    with zipfile.ZipFile(storyfilename, 'r') as zip_ref:
+        zip_ref.extractall("temp");
+        with open("temp/story.txt", "r") as storyFile:
+            story = [line.rstrip('\n') for line in storyFile.readlines()];
+        with open("temp/variables.txt", "r") as var_file:
+            variables_code = var_file.read();
+except :
+    print("File invalid");
+    sys.exit();
+
+
+print(story);
+
+# execute the variables file
+exec(variables_code, globals())
+
+
+def exit_handler():
+    try:
+        os.remove("temp/story.txt")
+        os.remove("temp/variables.txt")
+    except FileNotFoundError:
+        print(f"Error: File not found.")
+    except Exception as e:
+         print(f"An error occurred: {e}")
+
+atexit.register(exit_handler)
 
 option1Text = "1";
 option2Text = "2";
@@ -20,7 +49,6 @@ option4Text = "4";
 option5Text = "5";
 
 currentLine = 0;
-oldLine = 0;
 
 option1line = 0;
 option2line = 0;
@@ -80,7 +108,7 @@ option5 = tk.Button(text=option5Text, command=option5Pressed);
 text = tk.Text(window, height=5, width=50, wrap='word');
 
 restartButton = tk.Button(text="Restart", command=restart);
-exitButton = tk.Button(text="Exit", command=quit);
+exitButton = tk.Button(text="Exit", command=sys.exit);
 
 def updateButtons(numButtons):
     global option1, option2, option3, option4, option5, text;
@@ -166,7 +194,7 @@ def end(cause = "You Died"):
     exitButton.destroy();
 
     restartButton = tk.Button(text="Restart", command=restart);
-    exitButton = tk.Button(text="Exit", command=quit);
+    exitButton = tk.Button(text="Exit", command=sys.exit);
     text.insert("1.0", cause);
 
     text.pack(padx=20, pady=20);
