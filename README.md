@@ -71,7 +71,7 @@ option3Enabled ------------ Is option 3 enabled (bool)\
 option4Enabled ------------ Is option 4 enabled (bool)\
 option5Enabled ------------ Is option 5 enabled (bool)\
 
-## Creating a .cyoastory file
+## CREATING A .cyoastory FILE
 
 It's really quite simple.
 1) Select both your variables.txt and story.txt
