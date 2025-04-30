@@ -12,7 +12,7 @@ For example;
 >        |First Option| <= First Option after you click on the first path\
 >        |Second Option| <= Second Option listed under the one above\
 >    |Second Path| <= Second option when you open the game\
->        |Third Option| <= First option after you click on the second path\
+>        |Third Option| <= First option after you click on the second path
 
 __Lines are organized as shown below:__
 
@@ -42,14 +42,14 @@ The script reads this as:
 >  if(bombsPlanted>=30):\
 >      option5Enabled = True\
 >  else:\
->      option5Enabled = False\
+>      option5Enabled = False
 
 ### FUNCTIONS
 
 Restart() ----------------------- Goes back to line 1\
 End(str cause) ------------------ Shows end screen. Takes string as input to display in text box (ex. "You got electrocuted and died")\
 nextOption() -------------------- Skips to the next option. Useful for going back or skipping around the story (ex. currentLine = 2\nnextOption())\
-updateButtons(int numButtons) --- Updates the buttons. Takes number of buttons to show as input\
+updateButtons(int numButtons) --- Updates the buttons. Takes number of buttons to show as input
 
 ### VARIABLES
 
@@ -69,7 +69,7 @@ window -------------------- Tkinter window (object)\
 option2Enabled ------------ Is option 2 enabled (bool) ---- Use if you want to disable a line that is still in your story\
 option3Enabled ------------ Is option 3 enabled (bool)\
 option4Enabled ------------ Is option 4 enabled (bool)\
-option5Enabled ------------ Is option 5 enabled (bool)\
+option5Enabled ------------ Is option 5 enabled (bool)
 
 ## CREATING A .cyoastory FILE
 
